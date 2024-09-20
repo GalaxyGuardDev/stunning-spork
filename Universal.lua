@@ -313,21 +313,8 @@ local function AllNearPosition(distance, amount, checktab)
 end
 
 local sha = loadstring(vapeGithubRequest("Libraries/sha.lua"))()
-				end
-	end
-
-	function whitelist:hook()
-		if self.hooked then return end
-		self.hooked = true
-		local exp = coreGui:FindFirstChild('ExperienceChat')
-		if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
-			if exp then
-				if exp:WaitForChild('appLayout', 5) then
-					table.insert(vapeConnections, exp:FindFirstChild('RCTScrollContentView', true).ChildAdded:Connect(function(obj)
-						local plr = playersService:GetPlayerByUserId(tonumber(obj.Name:split('-')[1]) or 0)
-						obj = obj:FindFirstChild('TextMessage', true)
-						if obj then
-							if plr then
+				
+								if plr then
 								self:newchat(obj, plr, true)
 								obj:GetPropertyChangedSignal('Text'):Wait()
 								self:newchat(obj, plr)
@@ -365,9 +352,10 @@ local sha = loadstring(vapeGithubRequest("Libraries/sha.lua"))()
 				end))
 			end
 		end
-	end
+end
 
-	function whitelist:check
+
+	
 	function whitelist:check(first)
 		local whitelistloaded, err = pcall(function()
 			local _, subbed = pcall(function() return game:HttpGet('https://github.com/GalaxyGuardDev/whitelists') end)
